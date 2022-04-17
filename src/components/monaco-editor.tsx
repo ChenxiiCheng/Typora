@@ -1,3 +1,4 @@
+import * as React from 'react';
 import monaco from 'monaco-editor';
 import ReactMonacoEditor from '@monaco-editor/react';
 
@@ -8,6 +9,27 @@ export default function MonacoEditor() {
 	const { setMarkdownContent } = useMarkdownContentStore();
 	const { setMonacoEditorOptions, ...monacoEditorOptions } =
 		useMonacoEditorOptionsStore();
+	const monacoRef = React.useRef(null);
+	const [themeConfig, setThemeConfig] = React.useState<object | undefined>();
+
+	React.useEffect(() => {
+		const getTheme = async () => {
+			const res = await fetch('/themes/Dracula.json');
+			const data = await res.json();
+			setMonacoEditorOptions({ theme: 'github' });
+			setThemeConfig(data);
+		};
+		getTheme();
+	}, []);
+
+	React.useEffect(() => {
+		if (monacoRef && themeConfig) {
+			// @ts-ignore
+			monacoRef?.editor?.defineTheme('github', themeConfig);
+			// @ts-ignore
+			monacoRef?.editor?.setTheme('github');
+		}
+	}, [themeConfig]);
 
 	function handleMonacoEditorChange(
 		value: string | undefined,
@@ -16,11 +38,16 @@ export default function MonacoEditor() {
 		setMarkdownContent(value ?? '');
 	}
 
+	function handleEditorDidMount(editor: any, monaco: any) {
+		monacoRef.current = monaco;
+	}
+
 	return (
 		<ReactMonacoEditor
 			height="100%"
 			width="100%"
 			language={monacoEditorOptions.language}
+			onMount={handleEditorDidMount}
 			onChange={handleMonacoEditorChange}
 			options={{
 				cursorStyle: monacoEditorOptions.cursorStyle,

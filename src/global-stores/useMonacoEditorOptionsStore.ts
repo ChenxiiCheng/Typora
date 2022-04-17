@@ -3,7 +3,7 @@ import { combine } from 'zustand/middleware';
 
 type MonacoEditorOptionsStore = {
 	editorType: 'monaco';
-	theme: 'vs-light' | 'vs-dark';
+	theme: string;
 	language: 'markdown' | 'javascript' | 'typescript';
 	// 便捷器右侧预览小图
 	minimap: boolean;
