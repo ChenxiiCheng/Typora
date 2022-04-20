@@ -35,9 +35,8 @@ export default function GearModal({ className }: { className: string }) {
 			}
 		});
 		setMonacoEditorOptions(filteredData);
+		setGearStatus();
 	};
-
-	console.log('editorConfig = ', editorConfig);
 
 	const handleCancel = () => setGearStatus();
 
@@ -48,59 +47,9 @@ export default function GearModal({ className }: { className: string }) {
 					Editor Settings
 				</header>
 				<form
-					className="mt-5 divide-y divide-slate-100"
+					className="mt-3 divide-y divide-slate-100"
 					onSubmit={handleSubmit(handleFormSubmit)}
 				>
-					<div className="pb-3">
-						<h1 className="text-base font-medium text-slate-700">Language</h1>
-						<section className="flex flex-start items-center space-x-4">
-							<label
-								className="flex items-center my-2 space-x-2 text-sm text-slate-600"
-								htmlFor="markdown"
-							>
-								<span>Markdown</span>
-								<input
-									className="w-5 h-5 border-gray-200 accent-slate-600"
-									id="markdown"
-									type="radio"
-									defaultChecked={
-										editorConfig.language === 'markdown' ? true : false
-									}
-									{...register('language')}
-								/>
-							</label>
-							<label
-								className="flex items-center my-2 space-x-2 text-sm text-slate-600"
-								htmlFor="javascript"
-							>
-								<span>JavaScript</span>
-								<input
-									className="w-5 h-5 border-gray-200 accent-slate-600"
-									id="javascript"
-									type="radio"
-									defaultChecked={
-										editorConfig.language === 'javascript' ? true : false
-									}
-									{...register('language')}
-								/>
-							</label>
-							<label
-								className="flex items-center my-2 space-x-2 text-sm text-slate-600"
-								htmlFor="typescript"
-							>
-								<span>TypeScript</span>
-								<input
-									className="w-5 h-5 border-gray-200 accent-slate-600"
-									id="typescript"
-									type="radio"
-									defaultChecked={
-										editorConfig.language === 'typescript' ? true : false
-									}
-									{...register('language')}
-								/>
-							</label>
-						</section>
-					</div>
 					<div className="py-3 space-x-5">
 						<label
 							className="inline-flex items-center my-2 space-x-2 text-base font-medium text-slate-700"
@@ -130,6 +79,59 @@ export default function GearModal({ className }: { className: string }) {
 								{...register('lineNumbers')}
 							/>
 						</label>
+					</div>
+					<div className="py-3">
+						<h1 className="text-base font-medium text-slate-700">Language</h1>
+						<section className="flex flex-start items-center space-x-4">
+							<label
+								className="flex items-center my-2 space-x-2 text-sm text-slate-600"
+								htmlFor="markdown"
+							>
+								<span>Markdown</span>
+								<input
+									className="w-5 h-5 border-gray-200 accent-slate-600"
+									id="markdown"
+									type="radio"
+									value="markdown"
+									defaultChecked={
+										editorConfig.language === 'markdown' ? true : false
+									}
+									{...register('language')}
+								/>
+							</label>
+							<label
+								className="flex items-center my-2 space-x-2 text-sm text-slate-600"
+								htmlFor="javascript"
+							>
+								<span>JavaScript</span>
+								<input
+									className="w-5 h-5 border-gray-200 accent-slate-600"
+									id="javascript"
+									type="radio"
+									value="javascript"
+									defaultChecked={
+										editorConfig.language === 'javascript' ? true : false
+									}
+									{...register('language')}
+								/>
+							</label>
+							<label
+								className="flex items-center my-2 space-x-2 text-sm text-slate-600"
+								htmlFor="typescript"
+							>
+								<span>TypeScript</span>
+								<input
+									className="w-5 h-5 border-gray-200 accent-slate-600"
+									id="typescript"
+									type="radio"
+									value="typescript"
+									defaultChecked={
+										editorConfig.language === 'typescript' ? true : false
+									}
+									{...register('language')}
+								/>
+							</label>
+						</section>
 					</div>
 					<div className="py-3">
 						<h1 className="text-base font-medium text-slate-700">

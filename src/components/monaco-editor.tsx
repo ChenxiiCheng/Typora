@@ -14,7 +14,7 @@ export default function MonacoEditor() {
 
 	React.useEffect(() => {
 		const getTheme = async () => {
-			const res = await fetch('/themes/Dracula.json');
+			const res = await fetch('/themes/Github.json');
 			const data = await res.json();
 			setMonacoEditorOptions({ theme: 'github' });
 			setThemeConfig(data);
