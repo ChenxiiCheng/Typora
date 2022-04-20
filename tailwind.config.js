@@ -5,6 +5,9 @@ module.exports = {
 	],
 	theme: {
 		extend: {
+			colors: {
+				'mi-yellow': 'rgb(247, 246, 243)',
+			},
 			typography: {
 				DEFAULT: {
 					css: {
