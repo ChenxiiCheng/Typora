@@ -42,10 +42,13 @@ export default function MonacoEditor() {
 		monacoRef.current = monaco;
 	}
 
+	console.log('monacoEditorOptions = ', monacoEditorOptions);
+
 	return (
 		<ReactMonacoEditor
 			height="100%"
 			width="100%"
+			theme={monacoEditorOptions.theme}
 			language={monacoEditorOptions.language}
 			onMount={handleEditorDidMount}
 			onChange={handleMonacoEditorChange}

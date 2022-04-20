@@ -11,17 +11,27 @@ import Textarea from '../components/textarea';
 import MarkdownParser from '../components/markdown-parser';
 
 import { useEditorTypeStore } from '../global-stores/useEditorTypeStore';
+import { useMonacoEditorOptionsStore } from '../global-stores/useMonacoEditorOptionsStore';
 import { useGearStatusStore } from '../global-stores/useGearStatusStore';
 import { useSidebarWidthStore } from '../global-stores/useSidebarWidthStore';
 
 const Home: NextPage = () => {
 	const { editorType } = useEditorTypeStore();
 	const { gearStatus } = useGearStatusStore();
+	const { setMonacoEditorOptions, ...monacoEditorOptions } =
+		useMonacoEditorOptionsStore();
 	const { width, defaultWidth, minWidth, maxWidth, setWidth } =
 		useSidebarWidthStore();
 
 	const handleResize: ResizeCallback = (e, direction, ref, d) =>
 		setWidth(width + d.width);
+
+	const editorTheme = () => {
+		const darkThemes = ['vs-dark'];
+		if (darkThemes.includes(monacoEditorOptions.theme)) {
+			return true;
+		}
+	};
 
 	return (
 		<div>
@@ -33,7 +43,7 @@ const Home: NextPage = () => {
 			<main className="relative grid grid-rows-flow sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-7 h-screen">
 				{/* Overlay */}
 				{gearStatus ? (
-					<div className="absolute inset-0 w-full h-full z-10 bg-black opacity-20"></div>
+					<div className="absolute inset-0 w-full h-full z-10 bg-black opacity-40"></div>
 				) : null}
 
 				{/* Gear Modal */}
@@ -57,7 +67,11 @@ const Home: NextPage = () => {
 				</Resizable>
 
 				{/* Monaco Editor / Textarea */}
-				<div className="col-span-1 lg:col-span-3 sm:border-b sm:border-slate-200 sm:border-r-0 md:col-span-3 px-8 py-14 md:border-r border-slate-100 z-0">
+				<div
+					className={`col-span-1 lg:col-span-3 sm:border-b sm:border-slate-200 sm:border-r-0 md:col-span-3 px-8 py-14 md:border-r border-slate-100 z-0 ${
+						editorTheme() ? 'bg-vs-dark' : 'bg-white'
+					}`}
+				>
 					{editorType === 'textarea' ? <Textarea /> : <MonacoEditor />}
 				</div>
 

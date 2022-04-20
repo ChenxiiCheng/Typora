@@ -1,9 +1,11 @@
+import React from 'react';
 import { useForm } from 'react-hook-form';
 
 import { useGearStatusStore } from '../global-stores/useGearStatusStore';
 import { useMonacoEditorOptionsStore } from '../global-stores/useMonacoEditorOptionsStore';
 
 type FormData = {
+	theme: string;
 	language: 'markdown' | 'javascript' | 'typescript';
 	minimap: boolean;
 	lineNumbers: 'on' | 'off' | 'relative';
@@ -34,6 +36,7 @@ export default function GearModal({ className }: { className: string }) {
 				filteredData[key] = value;
 			}
 		});
+		console.log('data = ', data);
 		setMonacoEditorOptions(filteredData);
 		setGearStatus();
 	};
@@ -65,20 +68,51 @@ export default function GearModal({ className }: { className: string }) {
 								{...register('minimap')}
 							/>
 						</label>
-						<label
-							className="inline-flex items-center my-2 space-x-2 text-base font-medium text-slate-700"
-							htmlFor="lineNumbers"
-						>
-							<span>Show line number</span>
-							<input
-								className="w-5 h-5 border-gray-200 accent-slate-600"
-								id="lineNumbers"
-								type="checkbox"
-								value="lineNumbers"
-								defaultChecked={editorConfig.lineNumbers ? true : false}
-								{...register('lineNumbers')}
-							/>
-						</label>
+					</div>
+					<div className="flex items-center py-3 space-x-5">
+						<h1 className="text-base font-medium text-slate-700">Theme</h1>
+						<section className="relative flex flex-start items-center">
+							<span className="absolute inset-y-0 right-2 inline-flex items-center text-slate-500 z-0">
+								<svg
+									xmlns="http://www.w3.org/2000/svg"
+									className="h-4 w-4"
+									fill="none"
+									viewBox="0 0 24 24"
+									stroke="currentColor"
+									strokeWidth="2"
+								>
+									<path
+										strokeLinecap="round"
+										strokeLinejoin="round"
+										d="M19 9l-7 7-7-7"
+									/>
+								</svg>
+							</span>
+							<select
+								id="theme"
+								className="pl-2.5 pr-8 py-1.5 bg-transparent text-sm text-slate-600 border border-slate-300 rounded-lg shadow-sm outline-none appearance-none z-10"
+								{...register('theme')}
+							>
+								<option
+									value="vs-light"
+									selected={editorConfig.theme === 'vs-light' ? true : false}
+								>
+									VS Light
+								</option>
+								<option
+									value="vs-dark"
+									selected={editorConfig.theme === 'vs-dark' ? true : false}
+								>
+									VS Dark
+								</option>
+								<option
+									value="github"
+									selected={editorConfig.theme === 'github' ? true : false}
+								>
+									GitHub Theme
+								</option>
+							</select>
+						</section>
 					</div>
 					<div className="py-3">
 						<h1 className="text-base font-medium text-slate-700">Language</h1>
@@ -129,6 +163,61 @@ export default function GearModal({ className }: { className: string }) {
 										editorConfig.language === 'typescript' ? true : false
 									}
 									{...register('language')}
+								/>
+							</label>
+						</section>
+					</div>
+					<div className="py-3">
+						<h1 className="text-base font-medium text-slate-700">
+							Show Line Number
+						</h1>
+						<section className="flex flex-start items-center space-x-4">
+							<label
+								className="flex items-center my-2 space-x-2 text-sm text-slate-600"
+								htmlFor="on"
+							>
+								<span>On</span>
+								<input
+									className="w-5 h-5 border-gray-200 accent-slate-600"
+									id="on"
+									type="radio"
+									value="on"
+									defaultChecked={
+										editorConfig.lineNumbers === 'on' ? true : false
+									}
+									{...register('lineNumbers')}
+								/>
+							</label>
+							<label
+								className="flex items-center my-2 space-x-2 text-sm text-slate-600"
+								htmlFor="off"
+							>
+								<span>Off</span>
+								<input
+									className="w-5 h-5 border-gray-200 accent-slate-600"
+									id="off"
+									type="radio"
+									value="off"
+									defaultChecked={
+										editorConfig.lineNumbers === 'off' ? true : false
+									}
+									{...register('lineNumbers')}
+								/>
+							</label>
+							<label
+								className="flex items-center my-2 space-x-2 text-sm text-slate-600"
+								htmlFor="relative"
+							>
+								<span>Relative</span>
+								<input
+									className="w-5 h-5 border-gray-200 accent-slate-600"
+									id="relative"
+									type="radio"
+									value="relative"
+									defaultChecked={
+										editorConfig.lineNumbers === 'relative' ? true : false
+									}
+									{...register('lineNumbers')}
 								/>
 							</label>
 						</section>
@@ -224,7 +313,7 @@ export default function GearModal({ className }: { className: string }) {
 						<h1 className="text-base font-medium text-slate-700">
 							Cursor Style
 						</h1>
-						<section className="flex flex-wrap flex-start items-center">
+						<section className="flex flex-wrap flex-start items-center space-x-4">
 							<label
 								className="flex items-center my-2 mr-2 space-x-2 text-sm text-slate-600"
 								htmlFor="line"
