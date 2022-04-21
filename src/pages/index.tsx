@@ -40,7 +40,7 @@ const Home: NextPage = () => {
 				<meta name="description" content="Online markdown tool" />
 				<link rel="icon" href="/favicon.ico" />
 			</Head>
-			<main className="relative grid grid-rows-flow sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-7 h-screen">
+			<main className="relative h-screen flex min-w-[768px]">
 				{/* Overlay */}
 				{gearStatus ? (
 					<div className="absolute inset-0 w-full h-full z-10 bg-black opacity-40"></div>
@@ -55,29 +55,38 @@ const Home: NextPage = () => {
 				<Resizable
 					minWidth={minWidth}
 					maxWidth={maxWidth}
-					defaultSize={{ height: '100%', width: defaultWidth }}
-					size={{ width, height: '100%' }}
+					defaultSize={{ height: '99%', width: defaultWidth }}
+					size={{ width, height: '99%' }}
 					onResizeStop={handleResize}
 					style={{
 						transition: 'all 0.3s ease-out',
 					}}
-					className="hidden lg:block lg:col-span-1 bg-mi-yellow z-10"
+					className="hidden lg:block z-10"
 				>
 					<SiderBar />
 				</Resizable>
 
-				{/* Monaco Editor / Textarea */}
-				<div
-					className={`col-span-1 lg:col-span-3 sm:border-b sm:border-slate-200 sm:border-r-0 md:col-span-3 px-8 py-14 md:border-r border-slate-100 z-0 ${
-						editorTheme() ? 'bg-vs-dark' : 'bg-white'
-					}`}
-				>
-					{editorType === 'textarea' ? <Textarea /> : <MonacoEditor />}
-				</div>
+				{/* Right side */}
+				<div className="grid grid-cols-2 grid-flow-row w-full">
+					{/* Monaco Editor / Textarea */}
+					<div
+						className={`col-span-1 h-full sm:border-b sm:border-slate-200 sm:border-r-0 ${
+							monacoEditorOptions.editorType === 'text' ? 'px-14' : 'px-8'
+						} py-14 overflow-hidden md:border-r border-slate-100 z-0 ${
+							editorTheme() ? 'bg-vs-dark' : 'bg-white'
+						}`}
+					>
+						{monacoEditorOptions.editorType === 'text' ? (
+							<Textarea />
+						) : (
+							<MonacoEditor />
+						)}
+					</div>
 
-				{/* Markdown Preview */}
-				<div className="col-span-1 lg:col-span-3 px-8 py-14 prose prose-slat">
-					<MarkdownParser />
+					{/* Markdown Preview */}
+					<div className="col-span-1 h-full p-14 prose">
+						<MarkdownParser />
+					</div>
 				</div>
 			</main>
 		</div>

@@ -5,6 +5,7 @@ import { useGearStatusStore } from '../global-stores/useGearStatusStore';
 import { useMonacoEditorOptionsStore } from '../global-stores/useMonacoEditorOptionsStore';
 
 type FormData = {
+	editorType: string;
 	theme: string;
 	language: 'markdown' | 'javascript' | 'typescript';
 	minimap: boolean;
@@ -53,7 +54,173 @@ export default function GearModal({ className }: { className: string }) {
 					className="mt-3 divide-y divide-slate-100"
 					onSubmit={handleSubmit(handleFormSubmit)}
 				>
-					<div className="py-3 space-x-5">
+					<div className="flex items-center py-5 space-x-5">
+						<div className="flex items-center space-x-4">
+							<h1 className="text-base font-medium text-slate-700">Editor</h1>
+							<section className="relative flex flex-start items-center">
+								<span className="absolute inset-y-0 right-2 inline-flex items-center text-slate-500 z-0">
+									<svg
+										xmlns="http://www.w3.org/2000/svg"
+										className="h-4 w-4"
+										fill="none"
+										viewBox="0 0 24 24"
+										stroke="currentColor"
+										strokeWidth="2"
+									>
+										<path
+											strokeLinecap="round"
+											strokeLinejoin="round"
+											d="M19 9l-7 7-7-7"
+										/>
+									</svg>
+								</span>
+								<select
+									id="editorType"
+									className="pl-2.5 pr-8 py-1.5 bg-transparent text-sm text-slate-600 border border-slate-300 rounded-lg shadow-sm outline-none appearance-none z-10"
+									defaultValue={editorConfig.editorType}
+									{...register('editorType')}
+								>
+									<option value="text">Text</option>
+									<option value="monaco">Monaco</option>
+								</select>
+							</section>
+						</div>
+						<div className="flex items-center space-x-4">
+							<h1 className="text-base font-medium text-slate-700">Theme</h1>
+							<section className="relative flex flex-start items-center">
+								<span className="absolute inset-y-0 right-2 inline-flex items-center text-slate-500 z-0">
+									<svg
+										xmlns="http://www.w3.org/2000/svg"
+										className="h-4 w-4"
+										fill="none"
+										viewBox="0 0 24 24"
+										stroke="currentColor"
+										strokeWidth="2"
+									>
+										<path
+											strokeLinecap="round"
+											strokeLinejoin="round"
+											d="M19 9l-7 7-7-7"
+										/>
+									</svg>
+								</span>
+								<select
+									id="theme"
+									className="pl-2.5 pr-8 py-1.5 bg-transparent text-sm text-slate-600 border border-slate-300 rounded-lg shadow-sm outline-none appearance-none z-10"
+									defaultValue={editorConfig.theme}
+									{...register('theme')}
+								>
+									<option value="vs-light">VS Light</option>
+									<option value="vs-dark">VS Dark</option>
+								</select>
+							</section>
+						</div>
+						<div className="flex items-center space-x-4">
+							<h1 className="text-base font-medium text-slate-700">Language</h1>
+							<section className="relative flex flex-start items-center">
+								<span className="absolute inset-y-0 right-2 inline-flex items-center text-slate-500 z-0">
+									<svg
+										xmlns="http://www.w3.org/2000/svg"
+										className="h-4 w-4"
+										fill="none"
+										viewBox="0 0 24 24"
+										stroke="currentColor"
+										strokeWidth="2"
+									>
+										<path
+											strokeLinecap="round"
+											strokeLinejoin="round"
+											d="M19 9l-7 7-7-7"
+										/>
+									</svg>
+								</span>
+								<select
+									id="language"
+									className="pl-2.5 pr-8 py-1.5 bg-transparent text-sm text-slate-600 border border-slate-300 rounded-lg shadow-sm outline-none appearance-none z-10"
+									defaultValue={editorConfig.language}
+									{...register('language')}
+								>
+									<option value="markdown">Markdown</option>
+									<option value="javascript">JavaScript</option>
+									<option value="typescript">TypeScript</option>
+								</select>
+							</section>
+						</div>
+					</div>
+					<div className="flex items-center py-5 space-x-5">
+						<div className="flex items-center space-x-4">
+							<h1 className="text-base font-medium text-slate-700">
+								Cursor Blinking
+							</h1>
+							<section className="relative flex flex-start items-center">
+								<span className="absolute inset-y-0 right-2 inline-flex items-center text-slate-500 z-0">
+									<svg
+										xmlns="http://www.w3.org/2000/svg"
+										className="h-4 w-4"
+										fill="none"
+										viewBox="0 0 24 24"
+										stroke="currentColor"
+										strokeWidth="2"
+									>
+										<path
+											strokeLinecap="round"
+											strokeLinejoin="round"
+											d="M19 9l-7 7-7-7"
+										/>
+									</svg>
+								</span>
+								<select
+									id="cursorBlinking"
+									className="pl-2.5 pr-8 py-1.5 bg-transparent text-sm text-slate-600 border border-slate-300 rounded-lg shadow-sm outline-none appearance-none z-10"
+									defaultValue={editorConfig.cursorBlinking}
+									{...register('cursorBlinking')}
+								>
+									<option value="blink">Blink</option>
+									<option value="smooth">Smooth</option>
+									<option value="Phase">Phase</option>
+									<option value="Expand">Expand</option>
+									<option value="Solid">Solid</option>
+								</select>
+							</section>
+						</div>
+						<div className="flex items-center space-x-4">
+							<h1 className="text-base font-medium text-slate-700">
+								Cursor Style
+							</h1>
+							<section className="relative flex flex-start items-center">
+								<span className="absolute inset-y-0 right-2 inline-flex items-center text-slate-500 z-0">
+									<svg
+										xmlns="http://www.w3.org/2000/svg"
+										className="h-4 w-4"
+										fill="none"
+										viewBox="0 0 24 24"
+										stroke="currentColor"
+										strokeWidth="2"
+									>
+										<path
+											strokeLinecap="round"
+											strokeLinejoin="round"
+											d="M19 9l-7 7-7-7"
+										/>
+									</svg>
+								</span>
+								<select
+									id="cursorStyle"
+									className="pl-2.5 pr-8 py-1.5 bg-transparent text-sm text-slate-600 border border-slate-300 rounded-lg shadow-sm outline-none appearance-none z-10"
+									defaultValue={editorConfig.cursorStyle}
+									{...register('cursorStyle')}
+								>
+									<option value="line">Line</option>
+									<option value="line-thin">Line-thin</option>
+									<option value="Block">Block</option>
+									<option value="block-outline">Block-outline</option>
+									<option value="Underline">Underline</option>
+									<option value="underline-thin">Underline-thin</option>
+								</select>
+							</section>
+						</div>
+					</div>
+					<div className="flex items-center py-5 space-x-5">
 						<label
 							className="inline-flex items-center my-2 space-x-2 text-base font-medium text-slate-700"
 							htmlFor="minimap"
@@ -68,349 +235,39 @@ export default function GearModal({ className }: { className: string }) {
 								{...register('minimap')}
 							/>
 						</label>
-					</div>
-					<div className="flex items-center py-3 space-x-5">
-						<h1 className="text-base font-medium text-slate-700">Theme</h1>
-						<section className="relative flex flex-start items-center">
-							<span className="absolute inset-y-0 right-2 inline-flex items-center text-slate-500 z-0">
-								<svg
-									xmlns="http://www.w3.org/2000/svg"
-									className="h-4 w-4"
-									fill="none"
-									viewBox="0 0 24 24"
-									stroke="currentColor"
-									strokeWidth="2"
-								>
-									<path
-										strokeLinecap="round"
-										strokeLinejoin="round"
-										d="M19 9l-7 7-7-7"
-									/>
-								</svg>
-							</span>
-							<select
-								id="theme"
-								className="pl-2.5 pr-8 py-1.5 bg-transparent text-sm text-slate-600 border border-slate-300 rounded-lg shadow-sm outline-none appearance-none z-10"
-								{...register('theme')}
-							>
-								<option
-									value="vs-light"
-									selected={editorConfig.theme === 'vs-light' ? true : false}
-								>
-									VS Light
-								</option>
-								<option
-									value="vs-dark"
-									selected={editorConfig.theme === 'vs-dark' ? true : false}
-								>
-									VS Dark
-								</option>
-								<option
-									value="github"
-									selected={editorConfig.theme === 'github' ? true : false}
-								>
-									GitHub Theme
-								</option>
-							</select>
-						</section>
-					</div>
-					<div className="py-3">
-						<h1 className="text-base font-medium text-slate-700">Language</h1>
-						<section className="flex flex-start items-center space-x-4">
-							<label
-								className="flex items-center my-2 space-x-2 text-sm text-slate-600"
-								htmlFor="markdown"
-							>
-								<span>Markdown</span>
-								<input
-									className="w-5 h-5 border-gray-200 accent-slate-600"
-									id="markdown"
-									type="radio"
-									value="markdown"
-									defaultChecked={
-										editorConfig.language === 'markdown' ? true : false
-									}
-									{...register('language')}
-								/>
-							</label>
-							<label
-								className="flex items-center my-2 space-x-2 text-sm text-slate-600"
-								htmlFor="javascript"
-							>
-								<span>JavaScript</span>
-								<input
-									className="w-5 h-5 border-gray-200 accent-slate-600"
-									id="javascript"
-									type="radio"
-									value="javascript"
-									defaultChecked={
-										editorConfig.language === 'javascript' ? true : false
-									}
-									{...register('language')}
-								/>
-							</label>
-							<label
-								className="flex items-center my-2 space-x-2 text-sm text-slate-600"
-								htmlFor="typescript"
-							>
-								<span>TypeScript</span>
-								<input
-									className="w-5 h-5 border-gray-200 accent-slate-600"
-									id="typescript"
-									type="radio"
-									value="typescript"
-									defaultChecked={
-										editorConfig.language === 'typescript' ? true : false
-									}
-									{...register('language')}
-								/>
-							</label>
-						</section>
-					</div>
-					<div className="py-3">
-						<h1 className="text-base font-medium text-slate-700">
-							Show Line Number
-						</h1>
-						<section className="flex flex-start items-center space-x-4">
-							<label
-								className="flex items-center my-2 space-x-2 text-sm text-slate-600"
-								htmlFor="on"
-							>
-								<span>On</span>
-								<input
-									className="w-5 h-5 border-gray-200 accent-slate-600"
-									id="on"
-									type="radio"
-									value="on"
-									defaultChecked={
-										editorConfig.lineNumbers === 'on' ? true : false
-									}
+						<div className="flex items-center space-x-4">
+							<h1 className="text-base font-medium text-slate-700">
+								Show Line Number
+							</h1>
+							<section className="relative flex flex-start items-center">
+								<span className="absolute inset-y-0 right-2 inline-flex items-center text-slate-500 z-0">
+									<svg
+										xmlns="http://www.w3.org/2000/svg"
+										className="h-4 w-4"
+										fill="none"
+										viewBox="0 0 24 24"
+										stroke="currentColor"
+										strokeWidth="2"
+									>
+										<path
+											strokeLinecap="round"
+											strokeLinejoin="round"
+											d="M19 9l-7 7-7-7"
+										/>
+									</svg>
+								</span>
+								<select
+									id="lineNumbers"
+									className="pl-2.5 pr-8 py-1.5 bg-transparent text-sm text-slate-600 border border-slate-300 rounded-lg shadow-sm outline-none appearance-none z-10"
+									defaultValue={editorConfig.lineNumbers ?? 'off'}
 									{...register('lineNumbers')}
-								/>
-							</label>
-							<label
-								className="flex items-center my-2 space-x-2 text-sm text-slate-600"
-								htmlFor="off"
-							>
-								<span>Off</span>
-								<input
-									className="w-5 h-5 border-gray-200 accent-slate-600"
-									id="off"
-									type="radio"
-									value="off"
-									defaultChecked={
-										editorConfig.lineNumbers === 'off' ? true : false
-									}
-									{...register('lineNumbers')}
-								/>
-							</label>
-							<label
-								className="flex items-center my-2 space-x-2 text-sm text-slate-600"
-								htmlFor="relative"
-							>
-								<span>Relative</span>
-								<input
-									className="w-5 h-5 border-gray-200 accent-slate-600"
-									id="relative"
-									type="radio"
-									value="relative"
-									defaultChecked={
-										editorConfig.lineNumbers === 'relative' ? true : false
-									}
-									{...register('lineNumbers')}
-								/>
-							</label>
-						</section>
-					</div>
-					<div className="py-3">
-						<h1 className="text-base font-medium text-slate-700">
-							Cursor Blinking
-						</h1>
-						<section className="flex flex-start items-center space-x-4">
-							<label
-								className="flex items-center my-2 space-x-2 text-sm text-slate-600"
-								htmlFor="blink"
-							>
-								<span>Blink</span>
-								<input
-									className="w-5 h-5 border-gray-200 accent-slate-600"
-									id="blink"
-									type="radio"
-									value="blink"
-									defaultChecked={
-										editorConfig.cursorBlinking === 'blink' ? true : false
-									}
-									{...register('cursorBlinking')}
-								/>
-							</label>
-							<label
-								className="flex items-center my-2 space-x-2 text-sm text-slate-600"
-								htmlFor="smooth"
-							>
-								<span>Smooth</span>
-								<input
-									className="w-5 h-5 border-gray-200 accent-slate-600"
-									id="smotth"
-									type="radio"
-									value="smooth"
-									defaultChecked={
-										editorConfig.cursorBlinking === 'smooth' ? true : false
-									}
-									{...register('cursorBlinking')}
-								/>
-							</label>
-							<label
-								className="flex items-center my-2 space-x-2 text-sm text-slate-600"
-								htmlFor="phase"
-							>
-								<span>Phase</span>
-								<input
-									className="w-5 h-5 border-gray-200 accent-slate-600"
-									id="phase"
-									type="radio"
-									value="phase"
-									defaultChecked={
-										editorConfig.cursorBlinking === 'phase' ? true : false
-									}
-									{...register('cursorBlinking')}
-								/>
-							</label>
-							<label
-								className="flex items-center my-2 space-x-2 text-sm text-slate-600"
-								htmlFor="expand"
-							>
-								<span>Expand</span>
-								<input
-									className="w-5 h-5 border-gray-200 accent-slate-600"
-									id="expand"
-									type="radio"
-									value="expand"
-									defaultChecked={
-										editorConfig.cursorBlinking === 'expand' ? true : false
-									}
-									{...register('cursorBlinking')}
-								/>
-							</label>
-							<label
-								className="flex items-center my-2 space-x-2 text-sm text-slate-600"
-								htmlFor="solid"
-							>
-								<span>Solid</span>
-								<input
-									className="w-5 h-5 border-gray-200 accent-slate-600"
-									id="solid"
-									type="radio"
-									value="solid"
-									defaultChecked={
-										editorConfig.cursorBlinking === 'solid' ? true : false
-									}
-									{...register('cursorBlinking')}
-								/>
-							</label>
-						</section>
-					</div>
-					<div className="py-3">
-						<h1 className="text-base font-medium text-slate-700">
-							Cursor Style
-						</h1>
-						<section className="flex flex-wrap flex-start items-center space-x-4">
-							<label
-								className="flex items-center my-2 mr-2 space-x-2 text-sm text-slate-600"
-								htmlFor="line"
-							>
-								<span>Line</span>
-								<input
-									className="w-5 h-5 border-gray-200 accent-slate-600"
-									id="line"
-									type="radio"
-									value="line"
-									defaultChecked={
-										editorConfig.cursorStyle === 'line' ? true : false
-									}
-									{...register('cursorStyle')}
-								/>
-							</label>
-							<label
-								className="flex items-center my-2 mr-2 space-x-2 text-sm text-slate-600"
-								htmlFor="block"
-							>
-								<span>Block</span>
-								<input
-									className="w-5 h-5 border-gray-200 accent-slate-600"
-									id="block"
-									type="radio"
-									value="block"
-									defaultChecked={
-										editorConfig.cursorStyle === 'block' ? true : false
-									}
-									{...register('cursorStyle')}
-								/>
-							</label>
-							<label
-								className="flex items-center my-2 mr-2 space-x-2 text-sm text-slate-600"
-								htmlFor="underline"
-							>
-								<span>Underline</span>
-								<input
-									className="w-5 h-5 border-gray-200 accent-slate-600"
-									id="underline"
-									type="radio"
-									value="underline"
-									defaultChecked={
-										editorConfig.cursorStyle === 'underline' ? true : false
-									}
-									{...register('cursorStyle')}
-								/>
-							</label>
-							<label
-								className="flex items-center my-2 mr-2 space-x-2 text-sm text-slate-600"
-								htmlFor="line-thin"
-							>
-								<span>Line-thin</span>
-								<input
-									className="w-5 h-5 border-gray-200 accent-slate-600"
-									id="line-thin"
-									type="radio"
-									value="line-thin"
-									defaultChecked={
-										editorConfig.cursorStyle === 'line-thin' ? true : false
-									}
-									{...register('cursorStyle')}
-								/>
-							</label>
-							<label
-								className="flex items-center my-2 mr-2 space-x-2 text-sm text-slate-600"
-								htmlFor="block-outline"
-							>
-								<span>Block-outline</span>
-								<input
-									className="w-5 h-5 border-gray-200 accent-slate-600"
-									id="block-outline"
-									type="radio"
-									value="block-outline"
-									defaultChecked={
-										editorConfig.cursorStyle === 'block-outline' ? true : false
-									}
-									{...register('cursorStyle')}
-								/>
-							</label>
-							<label
-								className="flex items-center my-2 mr-2 space-x-2 text-sm text-slate-600"
-								htmlFor="underline-thin"
-							>
-								<span>Underline-thin</span>
-								<input
-									className="w-5 h-5 border-gray-200 accent-slate-600"
-									id="underline-thin"
-									type="radio"
-									value="underline-thin"
-									defaultChecked={
-										editorConfig.cursorStyle === 'underline-thin' ? true : false
-									}
-									{...register('cursorStyle')}
-								/>
-							</label>
-						</section>
+								>
+									<option value="on">On</option>
+									<option value="off">Off</option>
+									<option value="relative">Relative</option>
+								</select>
+							</section>
+						</div>
 					</div>
 					<div className="pt-6 space-x-5 text-right">
 						<button

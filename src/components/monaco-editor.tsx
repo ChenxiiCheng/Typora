@@ -12,24 +12,24 @@ export default function MonacoEditor() {
 	const monacoRef = React.useRef(null);
 	const [themeConfig, setThemeConfig] = React.useState<object | undefined>();
 
-	React.useEffect(() => {
-		const getTheme = async () => {
-			const res = await fetch('/themes/Github.json');
-			const data = await res.json();
-			setMonacoEditorOptions({ theme: 'github' });
-			setThemeConfig(data);
-		};
-		getTheme();
-	}, []);
+	// React.useEffect(() => {
+	// 	const getTheme = async () => {
+	// 		const res = await fetch('/themes/Github.json');
+	// 		const data = await res.json();
+	// 		setMonacoEditorOptions({ theme: 'github' });
+	// 		setThemeConfig(data);
+	// 	};
+	// 	getTheme();
+	// }, []);
 
-	React.useEffect(() => {
-		if (monacoRef && themeConfig) {
-			// @ts-ignore
-			monacoRef?.editor?.defineTheme('github', themeConfig);
-			// @ts-ignore
-			monacoRef?.editor?.setTheme('github');
-		}
-	}, [themeConfig]);
+	// React.useEffect(() => {
+	// 	if (monacoRef && themeConfig) {
+	// 		// @ts-ignore
+	// 		monacoRef?.editor?.defineTheme('github', themeConfig);
+	// 		// @ts-ignore
+	// 		monacoRef?.editor?.setTheme('github');
+	// 	}
+	// }, [themeConfig]);
 
 	function handleMonacoEditorChange(
 		value: string | undefined,
@@ -41,8 +41,6 @@ export default function MonacoEditor() {
 	function handleEditorDidMount(editor: any, monaco: any) {
 		monacoRef.current = monaco;
 	}
-
-	console.log('monacoEditorOptions = ', monacoEditorOptions);
 
 	return (
 		<ReactMonacoEditor

@@ -10,6 +10,7 @@ The Online Markdown Tool
 - Code formatting with Prettier
 - Consistent coding styles with EditorConfig
 - Static Types with TypeScript
+- Husky and lint-staged for pre-commit hook
 
 ## FAQ
 

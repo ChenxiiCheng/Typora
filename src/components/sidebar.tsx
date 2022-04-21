@@ -7,7 +7,7 @@ export default function SideBar() {
 	const handleGearClick = () => setGearStatus();
 
 	return (
-		<div className="relative h-full px-4">
+		<div className="relative h-screen px-4 bg-notion-yellow ">
 			<div className="flex justify-between items-center pt-10">
 				<span className="inline-block">
 					<Image width="50px" height="50px" src="/md-icon.png" alt="icon" />
