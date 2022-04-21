@@ -2,7 +2,7 @@ import create from 'zustand';
 import { combine } from 'zustand/middleware';
 
 type MonacoEditorOptionsStore = {
-	editorType: 'monaco';
+	editorType: 'monaco' | 'text';
 	theme: string;
 	language: 'markdown' | 'javascript' | 'typescript';
 	// 编辑器右侧预览小图
@@ -36,7 +36,7 @@ export const useMonacoEditorOptionsStore = create(
 	combine(
 		{
 			editorType: 'monaco',
-			theme: 'vs-dark',
+			theme: 'vs-light',
 			language: 'markdown',
 			minimap: false,
 			verticalScrollbar: 'hidden',
