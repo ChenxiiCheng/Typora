@@ -5,7 +5,7 @@ import { useGearStatusStore } from '../global-stores/useGearStatusStore';
 import { useMonacoEditorOptionsStore } from '../global-stores/useMonacoEditorOptionsStore';
 
 type FormData = {
-	editorType: string;
+	editorType: 'monaco' | 'text';
 	theme: string;
 	language: 'markdown' | 'javascript' | 'typescript';
 	minimap: boolean;
@@ -20,10 +20,6 @@ type FormData = {
 		| 'underline-thin';
 };
 
-type FilteredFormData = {
-	[key: string]: boolean | string;
-};
-
 export default function GearModal({ className }: { className: string }) {
 	const { register, handleSubmit } = useForm<FormData>();
 	const { setGearStatus } = useGearStatusStore();
@@ -31,14 +27,10 @@ export default function GearModal({ className }: { className: string }) {
 		useMonacoEditorOptionsStore();
 
 	const handleFormSubmit = (data: FormData) => {
-		const filteredData: FilteredFormData = {};
-		Object.entries(data).forEach(([key, value]) => {
-			if (!!value) {
-				filteredData[key] = value;
-			}
-		});
-		console.log('data = ', data);
-		setMonacoEditorOptions(filteredData);
+		if (data.minimap) {
+			data.minimap = true;
+		}
+		setMonacoEditorOptions(data);
 		setGearStatus();
 	};
 
@@ -212,7 +204,7 @@ export default function GearModal({ className }: { className: string }) {
 								>
 									<option value="line">Line</option>
 									<option value="line-thin">Line-thin</option>
-									<option value="Block">Block</option>
+									<option value="block">Block</option>
 									<option value="block-outline">Block-outline</option>
 									<option value="Underline">Underline</option>
 									<option value="underline-thin">Underline-thin</option>
