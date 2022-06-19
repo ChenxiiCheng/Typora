@@ -20,7 +20,7 @@ type FormData = {
 		| 'underline-thin';
 };
 
-export default function GearModal({ className }: { className: string }) {
+export default function GearModal({ className }: { className?: string }) {
 	const { register, handleSubmit } = useForm<FormData>();
 	const { setGearStatus } = useGearStatusStore();
 	const { setMonacoEditorOptions, ...editorConfig } =
@@ -68,6 +68,7 @@ export default function GearModal({ className }: { className: string }) {
 								</span>
 								<select
 									id="editorType"
+									data-testid="editorType"
 									className="pl-2.5 pr-8 py-1.5 bg-transparent text-sm text-slate-600 border border-slate-300 rounded-lg shadow-sm outline-none appearance-none z-10"
 									defaultValue={editorConfig.editorType}
 									{...register('editorType')}
@@ -98,6 +99,7 @@ export default function GearModal({ className }: { className: string }) {
 								</span>
 								<select
 									id="theme"
+									data-testid="theme"
 									className="pl-2.5 pr-8 py-1.5 bg-transparent text-sm text-slate-600 border border-slate-300 rounded-lg shadow-sm outline-none appearance-none z-10"
 									defaultValue={editorConfig.theme}
 									{...register('theme')}
@@ -128,6 +130,7 @@ export default function GearModal({ className }: { className: string }) {
 								</span>
 								<select
 									id="language"
+									data-testid="language"
 									className="pl-2.5 pr-8 py-1.5 bg-transparent text-sm text-slate-600 border border-slate-300 rounded-lg shadow-sm outline-none appearance-none z-10"
 									defaultValue={editorConfig.language}
 									{...register('language')}
@@ -163,6 +166,7 @@ export default function GearModal({ className }: { className: string }) {
 								</span>
 								<select
 									id="cursorBlinking"
+									data-testid="cursorBlinking"
 									className="pl-2.5 pr-8 py-1.5 bg-transparent text-sm text-slate-600 border border-slate-300 rounded-lg shadow-sm outline-none appearance-none z-10"
 									defaultValue={editorConfig.cursorBlinking}
 									{...register('cursorBlinking')}
@@ -198,6 +202,7 @@ export default function GearModal({ className }: { className: string }) {
 								</span>
 								<select
 									id="cursorStyle"
+									data-testid="cursorStyle"
 									className="pl-2.5 pr-8 py-1.5 bg-transparent text-sm text-slate-600 border border-slate-300 rounded-lg shadow-sm outline-none appearance-none z-10"
 									defaultValue={editorConfig.cursorStyle}
 									{...register('cursorStyle')}
@@ -250,6 +255,7 @@ export default function GearModal({ className }: { className: string }) {
 								</span>
 								<select
 									id="lineNumbers"
+									data-testid="lineNumbers"
 									className="pl-2.5 pr-8 py-1.5 bg-transparent text-sm text-slate-600 border border-slate-300 rounded-lg shadow-sm outline-none appearance-none z-10"
 									defaultValue={editorConfig.lineNumbers ?? 'off'}
 									{...register('lineNumbers')}
