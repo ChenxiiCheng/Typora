@@ -16,7 +16,6 @@ import { useGearStatusStore } from '../global-stores/useGearStatusStore';
 import { useSidebarWidthStore } from '../global-stores/useSidebarWidthStore';
 
 const Home: NextPage = () => {
-	const { editorType } = useEditorTypeStore();
 	const { gearStatus } = useGearStatusStore();
 	const { setMonacoEditorOptions, ...monacoEditorOptions } =
 		useMonacoEditorOptionsStore();
