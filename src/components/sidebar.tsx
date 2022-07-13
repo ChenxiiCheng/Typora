@@ -13,6 +13,7 @@ export default function SideBar() {
 					<Image width="50px" height="50px" src="/md-icon.png" alt="icon" />
 				</span>
 				<span
+					data-testid="gear-icon"
 					className="inline-block rounded-lg text-slate-600 transition duration-500 ease-in-out hover:rotate-180 hover:text-slate-800 hover:cursor-pointer"
 					onClick={handleGearClick}
 				>
